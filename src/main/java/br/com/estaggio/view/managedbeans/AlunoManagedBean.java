@@ -1,6 +1,8 @@
 package br.com.estaggio.view.managedbeans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -8,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.estaggio.controller.exceptions.BusinessException;
 import br.com.estaggio.controller.services.AlunoService;
 import br.com.estaggio.model.daos.AlunoDAO;
 import br.com.estaggio.model.entities.AlunoEntity;
@@ -29,15 +32,12 @@ public class AlunoManagedBean implements Serializable {
 	
 	private AlunoEntity aluno = new AlunoEntity();
 	
-	private String nome = "Moacir David";
-
+	private List<AlunoEntity> alunos = new ArrayList<>();
 	
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	private AlunoEntity alunoSelecionado;
+	
+	public void init() {
+		this.alunos = alunoDAO.todosAlunos();
 	}
 	
 	public AlunoEntity getAluno() {
@@ -46,6 +46,23 @@ public class AlunoManagedBean implements Serializable {
 
 	public void setAluno(AlunoEntity aluno) {
 		this.aluno = aluno;
+	}
+
+	
+	public List<AlunoEntity> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<AlunoEntity> alunos) {
+		this.alunos = alunoDAO.todosAlunos();
+	}
+	
+	public AlunoEntity getAlunoSelecionado() {
+		return alunoSelecionado;
+	}
+
+	public void setAlunoSelecionado(AlunoEntity alunoSelecionado) {
+		this.alunoSelecionado = alunoSelecionado;
 	}
 
 	public void salvar() {
@@ -60,5 +77,19 @@ public class AlunoManagedBean implements Serializable {
 			context.addMessage(null, mensagem);
 		} 
 	}
+	
+	public void consultar() {
+		this.alunos = this.alunoDAO.todosAlunos();
+	}
+	
+	public void excluirAluno(AlunoEntity aluno) {
+        try {
+            alunoService.excluirAluno(aluno);
+            alunos.remove(aluno); 
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Aluno excluído com sucesso!"));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excluir aluno", e.getMessage()));
+        }
+    }
 	
 }

@@ -1,6 +1,7 @@
 package br.com.estaggio.controller.services;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,5 +26,15 @@ public class AlunoService implements Serializable {
 			throw new BusinessException("Não foi possível registrar o aluno!");
 		}
 		this.alunoDAO.inserirAluno(aluno);
+	}
+	
+	@Transactional
+	public List<AlunoEntity> todosAlunos() {
+		return this.alunoDAO.todosAlunos();
+	}
+	
+	@Transactional
+	public void excluirAluno(AlunoEntity aluno) {
+		this.alunoDAO.excluirAluno(aluno);
 	}
 }

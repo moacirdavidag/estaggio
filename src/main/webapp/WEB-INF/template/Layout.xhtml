@@ -5,39 +5,35 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title><ui:insert name="titulo">Livros</ui:insert>
-	</title>
+	<title><ui:insert name="titulo">Estaggio</ui:insert></title>
 	<h:outputStylesheet library="arquivos" name="styles.css" />
 </h:head>
 <h:body>
-	<header>
-		Projeto DAC
-		<div style="float: right; margin-right: 20px; margin-top: 8px">
-		#{usuarioBean.nomeUsuario} <br/>
-		#{usuarioBean.dataLogin}
-		</div>
-	</header>
+	<header> <h1>Estaggio</h1> </header>
 	<h:form>
 		<p:menubar style="margin-top: -20px; margin-bottom: 20px">
-			<p:submenu label="Cadastros">
-				<p:menuitem value="Livro"
-					action="/cadastro-livro-layout?faces-redirect=true" />
-				<p:menuitem value="Editora"
-					action="/cadastro-editora-layout?faces-redirect=true" />
+			<p:submenu label="Cadastrar-se">
+				<p:menuitem value="Sou aluno"
+					action="/cadastro-aluno?faces-redirect=true" />
+				<p:menuitem value="Sou professor"
+					action="/cadastro-professor?faces-redirect=true" />
+				<p:menuitem value="Sou uma empresa"
+					action="/cadastro-empresa?faces-redirect=true" />
 			</p:submenu>
-			<p:submenu label="Consultas">
-				<p:menuitem value="Livros"
-					action="/listalivros-layout?faces-redirect=true" />
-				<p:menuitem value="Editoras"
-					action="/listaeditoras-layout?faces-redirect=true" />
+			<p:submenu label="Visualizar">
+				<p:menuitem value="Alunos"
+					action="/alunos?faces-redirect=true" />
+				<p:menuitem value="Professores"
+					action="/orientadores?faces-redirect=true" />
+				<p:menuitem value="Empresas"
+					action="/empresas?faces-redirect=true" />
 			</p:submenu>
-			
 		</p:menubar>
-		
+
 	</h:form>
 	<div id="conteudo">
 		<ui:insert name="corpo" />
 	</div>
-	<footer> Editora de Livros SA | <p:commandButton value="Sair" action="#{usuarioBean.sair}"/></footer>
+	<footer> Estaggio </footer>
 </h:body>
 </html>
