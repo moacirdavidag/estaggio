@@ -12,6 +12,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.estaggio.controller.services.AlunoService;
 import br.com.estaggio.controller.services.EstagioService;
 import br.com.estaggio.model.daos.AlunoDAO;
 import br.com.estaggio.model.daos.EmpresaDAO;
@@ -30,40 +31,43 @@ public class EstagioManagedBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private EstagioDAO estagioDAO;
-	
+
 	@Inject
 	private EstagioService estagioService;
-	
+
 	@Inject
 	private AlunoDAO alunoDAO;
-	
+
 	@Inject
 	private EmpresaDAO empresaDAO;
-	
+
 	@Inject
 	private OrientadorDAO orientadorDAO;
-	
+
+	@Inject
+	private AlunoService alunoService;
+
 	private List<EstagioEntity> estagios = new ArrayList<>();
-	
+
 	private List<AlunoEntity> alunos = new ArrayList<>();
-	
+
 	private List<EmpresaEntity> empresas = new ArrayList<>();
-	
+
 	private List<OrientadorEntity> orientadores = new ArrayList<>();
-	
+
 	private EstagioEntity estagio = new EstagioEntity();
 	private Date dataInicio;
-    private Date dataFinal;
-    private EstagioEntity estagioSelecionado = new EstagioEntity();
-    
-    private Long id;
-    private AlunoEntity alunoSelecionado = new AlunoEntity();
-    private OrientadorEntity orientadorSelecionado = new OrientadorEntity();
-    private EmpresaEntity empresaSelecionada = new EmpresaEntity();
-	
+	private Date dataFinal;
+	private EstagioEntity estagioSelecionado = new EstagioEntity();
+
+	private Long id;
+	private AlunoEntity alunoSelecionado = new AlunoEntity();
+	private OrientadorEntity orientadorSelecionado = new OrientadorEntity();
+	private EmpresaEntity empresaSelecionada = new EmpresaEntity();
+
 	@PostConstruct
 	public void init() {
 		this.estagios = estagioDAO.todosEstagios();
@@ -77,13 +81,13 @@ public class EstagioManagedBean implements Serializable {
 		try {
 			this.estagio.setStatus("EM ANDAMENTO");
 			Date sqlDataInicio = new Date(dataInicio.getTime());
-	        Date sqlDataFinal = new Date(dataFinal.getTime());
-	        
-	        this.estagio.setDataInicio(sqlDataInicio);
-	        this.estagio.setDataFinal(sqlDataFinal);
+			Date sqlDataFinal = new Date(dataFinal.getTime());
 
-	        this.estagioService.inserirEstagio(estagio);
-	        this.estagio = new EstagioEntity();
+			this.estagio.setDataInicio(sqlDataInicio);
+			this.estagio.setDataFinal(sqlDataFinal);
+
+			this.estagioService.inserirEstagio(estagio);
+			this.estagio = new EstagioEntity();
 			this.estagioService.inserirEstagio(estagio);
 			this.estagio = new EstagioEntity();
 			context.addMessage(null, new FacesMessage("Estágio salvo com sucesso!"));
@@ -91,9 +95,9 @@ public class EstagioManagedBean implements Serializable {
 			FacesMessage mensagem = new FacesMessage(e.getMessage());
 			mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
 			context.addMessage(null, mensagem);
-		} 
+		}
 	}
-	
+
 	public List<EstagioEntity> getEstagios() {
 		return estagios;
 	}
@@ -182,7 +186,6 @@ public class EstagioManagedBean implements Serializable {
 		this.orientadorSelecionado = orientadorSelecionado;
 	}
 
-
 	public EmpresaEntity getEmpresaSelecionada() {
 		return empresaSelecionada;
 	}
@@ -194,49 +197,57 @@ public class EstagioManagedBean implements Serializable {
 	public void consultar() {
 		this.estagios = this.estagioDAO.todosEstagios();
 	}
-	
+
 	public void consultarAlunos() {
 		this.alunoDAO.todosAlunos();
 	}
-	
+
 	public void consultarEmpresas() {
 		this.empresaDAO.todasEmpresas();
 	}
-	
+
 	public void consultarOrientadores() {
 		this.orientadorDAO.todosOrientadores();
 	}
-	
+
 	public String removerEstagio(Long id) {
 		this.estagio = this.estagioService.buscarPorId(id);
-		if(estagio != null) {			
+		if (estagio != null) {
 			this.estagioService.removerEstagio(estagio);
 		}
-	    this.estagios.remove(estagio);
-	    consultar();
-	    return "estagios?faces-redirect=true";
+		this.estagios.remove(estagio);
+		consultar();
+		return "estagios?faces-redirect=true";
 	}
 
 	public EstagioEntity carregarEstagioAtualizacao() {
 		this.estagioSelecionado = this.estagioDAO.buscarPorId(id);
 		if (estagioSelecionado.getAluno() != null && estagioSelecionado.getAluno().getId() != null) {
-	        estagioSelecionado.setAluno(alunoDAO.buscarPorId(estagioSelecionado.getAluno().getId()));
-	    }
+			estagioSelecionado.setAluno(alunoDAO.buscarPorId(estagioSelecionado.getAluno().getId()));
+		}
 		return this.estagioSelecionado;
 	}
-	
+
 	public String salvarAtualizacao() {
-		this.estagioSelecionado.setAluno(alunoSelecionado);
-		this.estagioSelecionado.setOrientador(orientadorSelecionado);
-		this.estagioSelecionado.setEmpresa(empresaSelecionada);
-		this.estagioService.atualizarEstagio(estagioSelecionado);
-		this.estagioSelecionado = new EstagioEntity();
-		return "estagios?faces-redirect=true";
-	}
-	
-	public String redirectTo(String page, Long id) {
-	    return page + "?faces-redirect=true&idEstagio=" + id;
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    try {
+
+	   	        this.estagioService.atualizarEstagio(estagioSelecionado);
+
+	        return "estagios?faces-redirect=true";
+	    } catch (Exception e) {
+	        // Log da exceção para facilitar a depuração
+	        e.printStackTrace();
+	        FacesMessage mensagem = new FacesMessage(e.getMessage());
+	        mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+	        context.addMessage(null, mensagem);
+	        return null; // Mantenha nulo para permanecer na mesma página em caso de erro.
+	    }
 	}
 
-	
+
+	public String redirectTo(String page, Long id) {
+		return page + "?faces-redirect=true&idEstagio=" + id;
+	}
+
 }

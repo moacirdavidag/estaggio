@@ -13,16 +13,16 @@
 	<ui:define name="corpo">
 		<h2>Cadastro de empresa</h2>
 		<h:form id="frm">
-			<h:messages showDetail="false" showSummary="true" />
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Razão social" />
-				<h:inputText size="60" value="#{empresaManagedBean.empresa.razaoSocial}"
+			<p:messages showDetail="true" showSummary="true" />
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Razão social" />
+				<p:inputText size="60" value="#{empresaManagedBean.empresa.razaoSocial}"
 					label="Razão social: " />
-				<h:outputLabel value="CNPJ " />
-				<h:inputText size="60" value="#{empresaManagedBean.empresa.cnpj}"
+				<p:outputLabel value="CNPJ " />
+				<p:inputText size="60" value="#{empresaManagedBean.empresa.cnpj}"
 					label="CNPJ: " />
-				<h:commandButton value="Salvar" action="#{empresaManagedBean.salvar}" />
-			</h:panelGrid>
+				<p:commandButton value="Salvar" action="#{empresaManagedBean.salvar}" />
+			</p:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

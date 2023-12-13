@@ -21,7 +21,7 @@ public class AvaliacaoEmpresaService implements Serializable {
 	
 	@Transactional
 	public void inserirAvaliacaoEmpresa(AvaliacaoEmpresaEntity avaliacao) {
-		this.avaliacaoEmpresaDAO.inserirAvaliacaoProfessor(avaliacao);
+		this.avaliacaoEmpresaDAO.inserirAvaliacaoEmpresa(avaliacao);
 	}
 	
 	@Transactional

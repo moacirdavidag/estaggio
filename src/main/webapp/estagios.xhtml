@@ -48,19 +48,25 @@
 					<h:outputText value="#{estagio.orientador.nome}" />
 				</p:column>
 				<p:column headerText="Ações">
-					<p:commandButton value="Editar" type="button"
+					<p:button value="Editar" type="button" styleClass="rounded-button"
+						outcome="editar-estagio.xhtml">
+						<f:param name="idEstagio" value="#{estagio.id}" />
+					</p:button>
+					<p:button value="Avaliação Professor" type="button"
 						styleClass="rounded-button"
-						action="#{estagioManagedBean.redirectTo('editar-estagio.xhtml', estagio.id)}" />
-					<p:commandButton value="Avaliação Professor" type="button"
+						outcome="criar-avaliacao-professor.xhtml">
+						<f:param name="idEstagio" value="#{estagio.id}" />
+					</p:button>
+					<p:button value="Avaliação Empresa" type="button"
 						styleClass="rounded-button"
-						action="#{estagioManagedBean.redirectTo('criar-avaliacao-professor.xhtml', estagio.id)}" />
-					<p:commandButton value="Avaliação Empresa" type="button"
-						styleClass="rounded-button"
-						action="#{estagioManagedBean.redirectTo('criar-avaliacao-empresa.xhtml', estagio.id)}" />
-					<p:commandButton type="button"
+						outcome="criar-avaliacao-professor.xhtml">
+						<f:param name="idEstagio" value="#{estagio.id}" />
+					</p:button>
+					<p:commandButton value="Excluir"
+						styleClass="rounded-button ui-button-danger"
 						action="#{estagioManagedBean.removerEstagio(estagio.id)}"
-						value="Excluir" styleClass="rounded-button ui-button-danger"
-						icon="" />
+						process="@this" ajax="true" />
+
 
 				</p:column>
 			</p:dataTable>

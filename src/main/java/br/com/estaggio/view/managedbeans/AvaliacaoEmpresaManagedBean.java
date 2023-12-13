@@ -31,7 +31,7 @@ public class AvaliacaoEmpresaManagedBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private AlunoDAO alunoDAO;
 	@Inject
@@ -40,17 +40,18 @@ public class AvaliacaoEmpresaManagedBean implements Serializable {
 	private OrientadorDAO orientadorDAO;
 	@Inject
 	private EstagioDAO estagioDAO;
-	
+
 	@Inject
 	private AvaliacaoEmpresaDAO avaliacaoEmpresaDAO;
-	
-	@Inject AvaliacaoEmpresaService avaliacaoEmpresaService;
-	
+
+	@Inject
+	private AvaliacaoEmpresaService avaliacaoEmpresaService;
+
 	@Inject
 	private EstagioManagedBean estagioManagedBean;
-	
+
 	private Long id;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -60,20 +61,20 @@ public class AvaliacaoEmpresaManagedBean implements Serializable {
 	}
 
 	private List<AvaliacaoEmpresaEntity> avaliacoes = new ArrayList<>();
-	
+
 	private List<AlunoEntity> alunos = new ArrayList<>();
-	
+
 	private List<EmpresaEntity> empresas = new ArrayList<>();
-	
+
 	private EstagioEntity estagioSelecionado;
-	
+
 	private AvaliacaoEmpresaEntity avaliacao;
-	
+
 	@PostConstruct
 	public void init() {
-	    this.avaliacao = new AvaliacaoEmpresaEntity(); 
+		this.avaliacao = new AvaliacaoEmpresaEntity();
 	}
-	
+
 	public List<AvaliacaoEmpresaEntity> getAvaliacoes() {
 		return avaliacoes;
 	}
@@ -120,7 +121,7 @@ public class AvaliacaoEmpresaManagedBean implements Serializable {
 			avaliacao.setEstagio(estagioDAO.buscarPorId(estagioManagedBean.getEstagioSelecionado().getId()));
 			avaliacao.setAluno(alunoDAO.buscarPorId(estagioManagedBean.getEstagioSelecionado().getAluno().getId()));
 			avaliacao.setEmpresa(
-					empresaDAO.buscarPorId(estagioManagedBean.getEstagioSelecionado().getOrientador().getId()));
+					empresaDAO.buscarPorId(estagioManagedBean.getEstagioSelecionado().getEmpresa().getId()));
 
 			this.avaliacaoEmpresaService.inserirAvaliacaoEmpresa(avaliacao);
 			this.avaliacao = new AvaliacaoEmpresaEntity();

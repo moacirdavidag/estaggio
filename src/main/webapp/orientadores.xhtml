@@ -16,9 +16,10 @@
 	<ui:define name="corpo">
 		<h2>Lista de orientadores</h2>
 		<h:form>
-			<p:dataTable value="#{orientadorManagedBean.orientadores}" var="orientador"
-				border="1" cellspacing="0" cellpadding="2">
-				<p:column sortBy="#{orientador.nome}" filterBy="#{orientador.nome}" filterMatchMode="contains">
+			<p:dataTable value="#{orientadorManagedBean.orientadores}"
+				var="orientador" border="1" cellspacing="0" cellpadding="2">
+				<p:column sortBy="#{orientador.nome}" filterBy="#{orientador.nome}"
+					filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Nome: " />
 					</f:facet>
@@ -49,9 +50,11 @@
 					<p:button value="Editar" outcome="editar-orientador.xhtml">
 						<f:param name="idOrientador" value="#{orientador.id}" />
 					</p:button>
-					<p:commandButton
+					<p:commandButton value="Excluir"
+						styleClass="rounded-button ui-button-danger"
 						action="#{orientadorManagedBean.removerOrientador(orientador.id)}"
-						value="Excluir" styleClass="rounded-button ui-button-danger" />
+						process="@this" ajax="true" />
+
 				</p:column>
 
 			</p:dataTable>

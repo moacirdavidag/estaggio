@@ -19,7 +19,7 @@ public class AvaliacaoEmpresaDAO implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
-	public void inserirAvaliacaoProfessor(AvaliacaoEmpresaEntity avaliacao) {
+	public void inserirAvaliacaoEmpresa(AvaliacaoEmpresaEntity avaliacao) {
 		this.manager.persist(avaliacao);
 	}
 	

@@ -33,16 +33,16 @@ public class AlunoEntity implements Serializable {
 	private String senha;
 
 	@ManyToOne
-    private OrientadorEntity orientador = new OrientadorEntity();
+    private OrientadorEntity orientador;
 
 	@ManyToOne
-    private EmpresaEntity empresa = new EmpresaEntity();
+    private EmpresaEntity empresa;
 
 	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
     private List <EstagioEntity> estagios = new ArrayList<>();
 	
 	@ManyToOne
-	private AvaliacaoProfessorEntity avaliacoesProfessor = new AvaliacaoProfessorEntity();
+	private AvaliacaoProfessorEntity avaliacoesProfessor;
 	
 	public AlunoEntity() {
 	}

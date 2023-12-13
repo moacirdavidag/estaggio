@@ -13,23 +13,23 @@
 	<ui:define name="corpo">
 		<h2>Cadastro de orientador</h2>
 		<h:form id="frm">
-			<h:messages showDetail="false" showSummary="true" />
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Nome completo" />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.nome}"
+			<p:messages showDetail="true" showSummary="true" />
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Nome completo" />
+				<p:inputText size="60" value="#{orientadorManagedBean.orientador.nome}"
 					label="Nome completo" />
-				<h:outputLabel value="CPF: " />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.cpf}"
+				<p:outputLabel value="CPF: " />
+				<p:inputText size="60" value="#{orientadorManagedBean.orientador.cpf}"
 					label="CPF " />
-				<h:outputLabel value="Matrícula: " />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.matricula}"
+				<p:outputLabel value="Matrícula: " />
+				<p:inputText size="60" value="#{orientadorManagedBean.orientador.matricula}"
 					label="Matricula " />
-				<h:outputLabel value="Email: " />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.email}"
+				<p:outputLabel value="Email: " />
+				<p:inputText size="60" value="#{orientadorManagedBean.orientador.email}"
 					label="Email " />
-				<h:outputLabel />
-				<h:commandButton value="Salvar" action="#{orientadorManagedBean.salvar}" />
-			</h:panelGrid>
+				<p:outputLabel />
+				<p:commandButton value="Salvar" action="#{orientadorManagedBean.salvar}" />
+			</p:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

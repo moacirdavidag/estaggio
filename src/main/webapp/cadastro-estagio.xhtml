@@ -18,16 +18,16 @@
 		</f:metadata>
 		<h2>Cadastro de estágio</h2>
 		<h:form id="frm">
-			<h:messages showDetail="false" showSummary="true" />
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Descrição:" />
-				<h:inputText size="60"
+			<p:messages showDetail="false" showSummary="true" />
+			<p:panelGrid columns="2">
+				<p:outputLabel value="Descrição:" />
+				<p:inputText size="60"
 					value="#{estagioManagedBean.estagio.descricao}" label="Descrição: " />
-				<h:outputLabel value="Carga horária total:" />
-				<h:inputText size="60"
+				<p:outputLabel value="Carga horária total:" />
+				<p:inputText size="60"
 					value="#{estagioManagedBean.estagio.cargaHorariaTotal}"
 					label="Carga horária total: " />
-				<h:outputLabel value="Data de Início:" />
+				<p:outputLabel value="Data de Início:" />
 				<p:calendar size="60" value="#{estagioManagedBean.dataInicio}"
 					label="Data de início: ">
 					<f:convertDateTime pattern="dd/MM/yyyy"
@@ -40,7 +40,7 @@
 						timeZone="America/Sao_Paulo" />
 				</p:calendar>
 				<div>
-					<h:outputLabel value="Aluno: " />
+					<p:outputLabel value="Aluno: " />
 					<br />
 					<p:selectOneMenu maxlength="60" value="#{estagioManagedBean.estagio.aluno}"
 						id="alunos" requiredMessage="Campo obrigatório" required="true"
@@ -50,7 +50,7 @@
 							itemValue="#{aluno}" itemLabel="#{aluno.nome}" />
 					</p:selectOneMenu>
 					<br />
-					<h:outputLabel value="Empresa: " />
+					<p:outputLabel value="Empresa: " />
 					<p:selectOneMenu maxlength="60" value="#{estagioManagedBean.estagio.empresa}"
 						id="empresas" requiredMessage="Campo obrigatório" required="true"
 						label="Empresa " converter="omnifaces.SelectItemsConverter">
@@ -59,7 +59,7 @@
 							var="empresa" itemValue="#{empresa}"
 							itemLabel="#{empresa.razaoSocial}" />
 					</p:selectOneMenu>
-					<h:outputLabel value="Orientador: " />
+					<p:outputLabel value="Orientador: " />
 					<br />
 					<p:selectOneMenu maxlength="60" value="#{estagioManagedBean.estagio.orientador}"
 						id="orientadores" requiredMessage="Campo obrigatório"
@@ -71,9 +71,9 @@
 							itemLabel="#{orientador.nome}" />
 					</p:selectOneMenu>
 				</div>
-				<h:commandButton value="Salvar"
+				<p:commandButton value="Salvar"
 					action="#{estagioManagedBean.salvar}" />
-			</h:panelGrid>
+			</p:panelGrid>
 		</h:form>
 	</ui:define>
 </ui:composition>

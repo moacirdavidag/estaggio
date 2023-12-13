@@ -14,6 +14,7 @@ import br.com.estaggio.controller.exceptions.BusinessException;
 import br.com.estaggio.controller.services.AlunoService;
 import br.com.estaggio.model.daos.AlunoDAO;
 import br.com.estaggio.model.entities.AlunoEntity;
+import br.com.estaggio.model.utils.Transactional;
 
 @Named
 @ViewScoped
@@ -76,17 +77,18 @@ public class AlunoManagedBean implements Serializable {
 	}
 
 	public void salvar() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		try {
-			this.alunoService.criarAluno(aluno);
-			this.aluno = new AlunoEntity();
-			context.addMessage(null, new FacesMessage("Aluno salvo com sucesso!"));
-		} catch (Exception e) {
-			FacesMessage mensagem = new FacesMessage(e.getMessage());
-			mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
-			context.addMessage(null, mensagem);
-		} 
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    try {
+	        this.alunoService.criarAluno(aluno);
+	        this.aluno = new AlunoEntity();
+	        context.addMessage(null, new FacesMessage("Aluno salvo com sucesso!"));
+	    } catch (Exception e) {
+	        FacesMessage mensagem = new FacesMessage(e.getMessage());
+	        mensagem.setSeverity(FacesMessage.SEVERITY_ERROR);
+	        context.addMessage(null, mensagem);
+	    } 
 	}
+
 	
 	public void consultar() {
 		this.alunos = this.alunoDAO.todosAlunos();
