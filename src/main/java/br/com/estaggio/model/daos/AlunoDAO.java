@@ -30,5 +30,13 @@ public class AlunoDAO implements Serializable {
 	public void excluirAluno(AlunoEntity aluno) {
 		this.manager.remove(aluno);
 	}
+	
+	public AlunoEntity buscarPorId(Long id) {
+		return this.manager.find(AlunoEntity.class, id);
+	}
 
+	public void atualizarAluno(AlunoEntity aluno) {
+		this.manager.merge(aluno);
+		this.manager.flush();
+	}
 }

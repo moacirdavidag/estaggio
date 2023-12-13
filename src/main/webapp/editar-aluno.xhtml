@@ -7,28 +7,32 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<h:head>
-		<title>Cadastro de aluno</title>
+		<title>Editar aluno</title>
 	</h:head>
-	<ui:define name="titulo">Cadastro de aluno</ui:define>
+	<f:metadata>
+		<f:viewParam name="idAluno" value="#{alunoManagedBean.id}" />
+		<f:event type="preRenderView" listener="#{alunoManagedBean.carregarAlunoAtualizacao}" />
+	</f:metadata>
+	<ui:define name="titulo">Editar aluno</ui:define>
 	<ui:define name="corpo">
-		<h2>Cadastro de aluno</h2>
+		<h2>Editar aluno</h2>
 		<h:form id="frm">
 			<h:messages showDetail="false" showSummary="true" />
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome completo" />
-				<h:inputText size="60" value="#{alunoManagedBean.aluno.nome}"
+				<h:inputText size="60" value="#{alunoManagedBean.alunoSelecionado.nome}"
 					label="Nome completo" />
 				<h:outputLabel value="Email: " />
-				<h:inputText size="60" value="#{alunoManagedBean.aluno.email}"
+				<h:inputText size="60" value="#{alunoManagedBean.alunoSelecionado.email}"
 					label="Email " />
 				<h:outputLabel value="Matrícula: " />
-				<h:inputText size="60" value="#{alunoManagedBean.aluno.matricula}"
+				<h:inputText size="60" value="#{alunoManagedBean.alunoSelecionado.matricula}"
 					label="Matricula " />
 				<h:outputLabel value="Senha: " />
-				<h:inputSecret size="60" value="#{alunoManagedBean.aluno.senha}"
+				<h:inputSecret size="60" value="#{alunoManagedBean.alunoSelecionado.senha}"
 					label="Senha " />
 				<h:outputLabel />
-				<h:commandButton value="Salvar" action="#{alunoManagedBean.salvar}" />
+				<h:commandButton value="Salvar" action="#{alunoManagedBean.salvarAtualizacao}" />
 			</h:panelGrid>
 		</h:form>
 	</ui:define>

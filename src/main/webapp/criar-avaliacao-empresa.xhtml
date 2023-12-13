@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Criar avaliação de empresa</title>
+	</h:head>
+	<ui:define name="titulo">Criar avaliação de empresa</ui:define>
+	<ui:define name="corpo">
+		<f:metadata>
+			<f:viewParam name="idEstagio" value="#{estagioManagedBean.id}" />
+			<f:event type="preRenderView"
+				listener="#{estagioManagedBean.carregarEstagioAtualizacao}" />
+		</f:metadata>
+		<h2>Criar avaliação de empresa</h2>
+		<h:form>
+			<h:messages showDetail="false" showSummary="true" />
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Descrição:" />
+				<h:outputText size="60"
+					value="#{estagioManagedBean.estagioSelecionado.descricao}"
+					label="Descrição: " />
+				<h:outputLabel value="Carga horária total:" />
+				<h:outputText size="60"
+					value="#{estagioManagedBean.estagioSelecionado.cargaHorariaTotal}"
+					label="Carga horária total: " />
+				<div>
+					<h:outputLabel value="Aluno: " />
+					<br />
+					<p:selectOneMenu maxlength="60"
+						value="#{estagioManagedBean.alunoSelecionado}" id="alunos"
+						requiredMessage="Campo obrigatório" required="true" label="Aluno "
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{estagioManagedBean.alunos}" var="aluno"
+							itemValue="#{aluno}" itemLabel="#{aluno.nome}" />
+					</p:selectOneMenu>
+					<br />
+					<h:outputLabel value="Empresa: " />
+					<p:selectOneMenu maxlength="60"
+						value="#{estagioManagedBean.empresaSelecionada}"
+						id="empresas" requiredMessage="Campo obrigatório" required="true"
+						label="Empresa " converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{estagioManagedBean.empresas}"
+							var="empresa" itemValue="#{empresa}"
+							itemLabel="#{empresa.razaoSocial}" />
+					</p:selectOneMenu>
+					<h:outputLabel value="Orientador: " />
+					<br />
+					<p:selectOneMenu maxlength="60"
+						value="#{estagioManagedBean.orientadorSelecionado}"
+						id="orientadores" requiredMessage="Campo obrigatório"
+						required="true" label="Orientador "
+						converter="omnifaces.SelectItemsConverter">
+						<f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+						<f:selectItems value="#{estagioManagedBean.orientadores}"
+							var="orientador" itemValue="#{orientador}"
+							itemLabel="#{orientador.nome}" />
+					</p:selectOneMenu>
+				</div>
+
+				<p:outputLabel value="Rendimento " />
+				<br />
+				<p:selectOneMenu id="option1"
+					value="#{avaliacaoEmpresaManagedBean.avaliacao.rendimento}">
+					<f:selectItem itemLabel="INSUFICIENTE" itemValue="INSUFICIENTE" />
+					<f:selectItem itemLabel="REGULAR" itemValue="REGULAR" />
+					<f:selectItem itemLabel="BOM" itemValue="BOM" />
+					<f:selectItem itemLabel="MUITO BOM" itemValue="MUITO BOM" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Conhecimento " />
+				<br />
+				<p:selectOneMenu id="option2"
+					value="#{avaliacaoEmpresaManagedBean.avaliacao.conhecimento}">
+					<f:selectItem itemLabel="INSUFICIENTE" itemValue="INSUFICIENTE" />
+					<f:selectItem itemLabel="REGULAR" itemValue="REGULAR" />
+					<f:selectItem itemLabel="BOM" itemValue="BOM" />
+					<f:selectItem itemLabel="MUITO BOM" itemValue="MUITO BOM" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Cumprimento de Tarefas " />
+				<br />
+				<p:selectOneMenu id="option3"
+					value="#{avaliacaoEmpresaManagedBean.avaliacao.cumprimentoTarefas}">
+					<f:selectItem itemLabel="INSUFICIENTE" itemValue="INSUFICIENTE" />
+					<f:selectItem itemLabel="REGULAR" itemValue="REGULAR" />
+					<f:selectItem itemLabel="BOM" itemValue="BOM" />
+					<f:selectItem itemLabel="MUITO BOM" itemValue="MUITO BOM" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Aprendizagem " />
+				<br />
+				<p:selectOneMenu id="option4"
+					value="#{avaliacaoEmpresaManagedBean.avaliacao.aprendizagem}">
+					<f:selectItem itemLabel="INSUFICIENTE" itemValue="INSUFICIENTE" />
+					<f:selectItem itemLabel="REGULAR" itemValue="REGULAR" />
+					<f:selectItem itemLabel="BOM" itemValue="BOM" />
+					<f:selectItem itemLabel="MUITO BOM" itemValue="MUITO BOM" />
+				</p:selectOneMenu>
+				<p:outputLabel value="Desempenho " />
+				<br />
+				<p:selectOneMenu id="option5"
+					value="#{avaliacaoEmpresaManagedBean.avaliacao.desempenho}">
+					<f:selectItem itemLabel="INSUFICIENTE" itemValue="INSUFICIENTE" />
+					<f:selectItem itemLabel="REGULAR" itemValue="REGULAR" />
+					<f:selectItem itemLabel="BOM" itemValue="BOM" />
+					<f:selectItem itemLabel="MUITO BOM" itemValue="MUITO BOM" />
+				</p:selectOneMenu>
+
+				<h:commandButton value="Salvar"
+					action="#{avaliacaoEmpresaManagedBean.salvar}" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

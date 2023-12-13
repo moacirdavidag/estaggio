@@ -1,9 +1,11 @@
 package br.com.estaggio.model.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,13 +33,16 @@ public class AlunoEntity implements Serializable {
 	private String senha;
 
 	@ManyToOne
-    private OrientadorEntity orientador;
+    private OrientadorEntity orientador = new OrientadorEntity();
 
 	@ManyToOne
-    private EmpresaEntity empresa;
+    private EmpresaEntity empresa = new EmpresaEntity();
 
-	@OneToMany(mappedBy = "aluno")
-    private List <EstagioEntity> estagios;
+	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+    private List <EstagioEntity> estagios = new ArrayList<>();
+	
+	@ManyToOne
+	private AvaliacaoProfessorEntity avaliacoesProfessor = new AvaliacaoProfessorEntity();
 	
 	public AlunoEntity() {
 	}
@@ -102,6 +107,14 @@ public class AlunoEntity implements Serializable {
 
 	public void setEstagios(List<EstagioEntity> estagios) {
 		this.estagios = estagios;
+	}
+
+	public AvaliacaoProfessorEntity getAvaliacoesProfessor() {
+		return avaliacoesProfessor;
+	}
+
+	public void setAvaliacoesProfessor(AvaliacaoProfessorEntity avaliacoesProfessor) {
+		this.avaliacoesProfessor = avaliacoesProfessor;
 	}
 
 	@Override

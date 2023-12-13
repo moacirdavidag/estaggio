@@ -27,5 +27,18 @@ public class OrientadorDAO implements Serializable {
 		TypedQuery<OrientadorEntity> query = manager.createQuery("FROM OrientadorEntity", OrientadorEntity.class);
 		return query.getResultList();
 	}
+	
+	public void removerOrientador(OrientadorEntity orientador) {
+		this.manager.remove(orientador);
+	}
+	
+	public OrientadorEntity buscarPorId(Long id) {
+		return this.manager.find(OrientadorEntity.class, id);
+	}
+	
+	public void editarOrientador(OrientadorEntity orientador) {
+		this.manager.merge(orientador);
+		this.manager.flush();
+	}
 
 }

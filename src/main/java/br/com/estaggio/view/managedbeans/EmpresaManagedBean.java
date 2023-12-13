@@ -14,6 +14,7 @@ import br.com.estaggio.controller.exceptions.BusinessException;
 import br.com.estaggio.controller.services.AlunoService;
 import br.com.estaggio.controller.services.EmpresaService;
 import br.com.estaggio.model.daos.EmpresaDAO;
+import br.com.estaggio.model.entities.AlunoEntity;
 import br.com.estaggio.model.entities.EmpresaEntity;
 
 
@@ -37,6 +38,8 @@ public class EmpresaManagedBean implements Serializable {
 	private List<EmpresaEntity> empresas = new ArrayList<>();
 	
 	private EmpresaEntity empresaSelecionada;
+	
+	private Long id;
 	
 	public void init() {
 		this.empresas = empresaDAO.todasEmpresas();
@@ -67,6 +70,14 @@ public class EmpresaManagedBean implements Serializable {
 		this.empresaSelecionada = empresaSelecionada;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
@@ -82,6 +93,27 @@ public class EmpresaManagedBean implements Serializable {
 	
 	public void consultar() {
 		this.empresas = this.empresaDAO.todasEmpresas();
+	}
+	
+	public String removerEmpresa(Long id) {
+		this.empresa = this.empresaService.buscarPorId(id);
+		if(empresa != null) {			
+			this.empresaService.removerEmpresa(empresa);
+		}
+	    this.empresas.remove(empresa);
+	    consultar();
+	    return "empresas?faces-redirect=true";
+	}
+	
+	public EmpresaEntity carregarEmpresaAtualizacao() {
+		this.empresaSelecionada = this.empresaDAO.buscarPorId(id);
+		return this.empresaSelecionada;
+	}
+	
+	public String salvarAtualizacao() {
+		this.empresaService.atualizarEmpresa(empresaSelecionada);
+		this.empresaSelecionada = new EmpresaEntity();
+		return "empresas?faces-redirect=true";
 	}
 	
 }

@@ -28,5 +28,20 @@ public class OrientadorService implements Serializable {
 	public List<OrientadorEntity> todosOrientadores() {
 		return this.orientadorDAO.todosOrientadores();
 	}
+	
+	@Transactional
+	public void removerOrientador(OrientadorEntity orientador) {
+		this.orientadorDAO.removerOrientador(orientador);
+	}
+	
+	@Transactional
+	public OrientadorEntity buscarPorId(Long id) {
+		return this.orientadorDAO.buscarPorId(id);
+	}
+	
+	@Transactional
+	public void atualizarOrientador(OrientadorEntity orientador) {
+		this.orientadorDAO.editarOrientador(orientador);
+	}
 
 }

@@ -22,9 +22,6 @@ public class AlunoService implements Serializable {
 	
 	@Transactional
 	public void criarAluno(AlunoEntity aluno)throws BusinessException {
-		if(aluno == null) {
-			throw new BusinessException("Não foi possível registrar o aluno!");
-		}
 		this.alunoDAO.inserirAluno(aluno);
 	}
 	
@@ -36,5 +33,15 @@ public class AlunoService implements Serializable {
 	@Transactional
 	public void excluirAluno(AlunoEntity aluno) {
 		this.alunoDAO.excluirAluno(aluno);
+	}
+	
+	@Transactional
+	public AlunoEntity buscarPorId(Long id) {
+		return this.alunoDAO.buscarPorId(id);
+	}
+	
+	@Transactional
+	public void atualizarAluno(AlunoEntity aluno) {
+		this.alunoDAO.atualizarAluno(aluno);
 	}
 }

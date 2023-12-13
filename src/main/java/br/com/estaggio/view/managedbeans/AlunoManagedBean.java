@@ -36,6 +36,8 @@ public class AlunoManagedBean implements Serializable {
 	
 	private AlunoEntity alunoSelecionado;
 	
+	private Long id;
+	
 	public void init() {
 		this.alunos = alunoDAO.todosAlunos();
 	}
@@ -65,6 +67,14 @@ public class AlunoManagedBean implements Serializable {
 		this.alunoSelecionado = alunoSelecionado;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public void salvar() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		try {
@@ -82,14 +92,25 @@ public class AlunoManagedBean implements Serializable {
 		this.alunos = this.alunoDAO.todosAlunos();
 	}
 	
-	public void excluirAluno(AlunoEntity aluno) {
-        try {
-            alunoService.excluirAluno(aluno);
-            alunos.remove(aluno); 
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Aluno excluído com sucesso!"));
-        } catch (Exception e) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro ao excluir aluno", e.getMessage()));
-        }
-    }
+	public String removerAluno(Long id) {
+		this.aluno = this.alunoService.buscarPorId(id);
+		if(aluno != null) {			
+			this.alunoService.excluirAluno(aluno);
+		}
+	    this.alunos.remove(aluno);
+	    consultar();
+	    return "alunos?faces-redirect=true";
+	}
+	
+	public AlunoEntity carregarAlunoAtualizacao() {
+		this.alunoSelecionado = this.alunoDAO.buscarPorId(id);
+		return this.alunoSelecionado;
+	}
+	
+	public String salvarAtualizacao() {
+		this.alunoService.atualizarAluno(alunoSelecionado);
+		this.alunoSelecionado = new AlunoEntity();
+		return "alunos?faces-redirect=true";
+	}
 	
 }

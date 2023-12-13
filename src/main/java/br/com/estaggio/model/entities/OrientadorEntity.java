@@ -5,11 +5,12 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.OneToMany;
-
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +36,9 @@ public class OrientadorEntity implements Serializable {
 
 	@OneToMany(mappedBy = "orientador")
 	private List<EstagioEntity> estagios;
+	
+	@ManyToOne
+	private AvaliacaoProfessorEntity avaliacoesProfessor;
 	
 	public OrientadorEntity() {}
 	
@@ -100,6 +104,14 @@ public class OrientadorEntity implements Serializable {
 
 	public void setEstagios(List<EstagioEntity> estagios) {
 		this.estagios = estagios;
+	}
+
+	public AvaliacaoProfessorEntity getAvaliacoesProfessor() {
+		return avaliacoesProfessor;
+	}
+
+	public void setAvaliacoesProfessor(AvaliacaoProfessorEntity avaliacoesProfessor) {
+		this.avaliacoesProfessor = avaliacoesProfessor;
 	}
 
 	@Override

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>Estágios</title>
+	</h:head>
+	<f:metadata>
+		<f:viewAction action="#{estagioManagedBean.consultarAlunos}" />
+		<f:viewAction action="#{estagioManagedBean.consultarEmpresas}" />
+		<f:viewAction action="#{estagioManagedBean.consultarOrientadores}" />
+		<f:viewAction action="#{avaliacaoEmpresaManagedBean.consultar}" />
+		<f:viewParam name="idEstagio" value="#{estagioManagedBean.id}" />
+	</f:metadata>
+	<ui:define name="titulo">Lista de avaliações</ui:define>
+	<ui:define name="corpo">
+		<h2>Lista de avaliações das empresas</h2>
+		<h:form>
+			<p:dataTable value="#{avaliacaoEmpresaManagedBean.avaliacoes}"
+				var="avaliacao" border="1" cellspacing="0" cellpadding="2">
+				<p:column sortBy="#{avaliacao.estagio.descricao}"
+					filterBy="#{avaliacao.estagio.descricao}"
+					filterMatchMode="contains">
+					<f:facet name="header">
+						<h:outputText value="Estágio" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.estagio.descricao}" />
+				</p:column>
+				<p:column filterBy="#{avaliacao.aluno.nome}"
+					sortBy="#{avaliacao.aluno.nome}"
+					filterMatchMode="contains">
+					<f:facet name="header">
+						<h:outputText value="Aluno" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.aluno.nome}" />
+				</p:column>
+				<p:column filterBy="#{avaliacao.orientador.nome}"
+					filterMatchMode="equals">
+					<f:facet name="header">
+						<h:outputText value="Empresa" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.empresa.razaoSocial}" />
+				</p:column>
+				<p:column filterBy="#{avaliacao.rendimento}"
+					filterMatchMode="equals">
+					<f:facet name="header">
+						<h:outputText value="Rendimento" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.rendimento}" />
+				</p:column>
+				<p:column filterBy="#{avaliacao.conhecimento}"
+					filterMatchMode="equals">
+					<f:facet name="header">
+						<h:outputText value="Conhecimento" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.conhecimento}" />
+				</p:column>
+				<p:column filterBy="#{avaliacao.cumprimentoTarefas}"
+					filterMatchMode="equals">
+					<f:facet name="header">
+						<h:outputText value="Cumprimento de Tarefas" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.cumprimentoTarefas}" />
+				</p:column>
+				<p:column filterBy="#{avaliacao.aprendizagem}"
+					filterMatchMode="equals">
+					<f:facet name="header">
+						<h:outputText value="Aprendizagem" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.aprendizagem}" />
+				</p:column>
+				<p:column filterBy="#{avaliacao.desempenho}"
+					filterMatchMode="equals">
+					<f:facet name="header">
+						<h:outputText value="Desempenho" />
+					</f:facet>
+					<h:outputText value="#{avaliacao.desempenho}" />
+				</p:column>
+			</p:dataTable>
+			<p:commandLink value="Ir para cadastro de estágios"
+				action="cadastro-estagio?faces-redirect=true" />
+			<br />
+			<p:commandLink value="Home" action="index?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+

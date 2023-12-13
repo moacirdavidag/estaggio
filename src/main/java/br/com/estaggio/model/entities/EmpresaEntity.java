@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +27,7 @@ public class EmpresaEntity implements Serializable {
 	@OneToMany (mappedBy = "empresa")
     private List <AlunoEntity> alunos;
 
-	@OneToMany(mappedBy = "empresa")
+	@OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL)
 	private List<EstagioEntity> estagios;
 
 	public EmpresaEntity() {}

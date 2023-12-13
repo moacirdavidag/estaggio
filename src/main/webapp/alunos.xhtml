@@ -18,7 +18,8 @@
 		<h:form>
 			<p:dataTable value="#{alunoManagedBean.alunos}" var="aluno"
 				border="1" cellspacing="0" cellpadding="2">
-				<p:column>
+				<p:column sortBy="#{aluno.nome}" filterBy="#{aluno.nome}"
+					filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Nome completo" />
 					</f:facet>
@@ -40,10 +41,12 @@
 					<f:facet name="header">
 						<h:outputText value="Ações" />
 					</f:facet>
-					<p:commandLink
-						actionListener="#{alunoManagedBean.excluirAluno(aluno)}">
-						<h:outputText value="Excluir" />
-					</p:commandLink>
+					<p:button value="Editar" outcome="editar-aluno.xhtml">
+						<f:param name="idAluno" value="#{aluno.id}" />
+					</p:button>
+					<p:commandButton
+						action="#{alunoManagedBean.removerAluno(aluno.id)}"
+						value="Excluir" styleClass="rounded-button ui-button-danger" />
 				</p:column>
 
 			</p:dataTable>

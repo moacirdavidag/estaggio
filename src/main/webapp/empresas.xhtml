@@ -18,7 +18,7 @@
 		<h:form>
 			<p:dataTable value="#{empresaManagedBean.empresas}" var="empresa"
 				border="1" cellspacing="0" cellpadding="2">
-				<p:column>
+				<p:column sortBy="#{empresa.razaoSocial}" filterBy="#{empresa.razaoSocial}" filterMatchMode="contains">
 					<f:facet name="header">
 						<h:outputText value="Razão social" />
 					</f:facet>
@@ -34,10 +34,12 @@
 					<f:facet name="header">
 						<h:outputText value="Ações" />
 					</f:facet>
-					<p:commandLink
-						actionListener="#">
-						<h:outputText value="Excluir" />
-					</p:commandLink>
+					<p:button value="Editar" outcome="editar-empresa.xhtml">
+						<f:param name="idEmpresa" value="#{empresa.id}" />
+					</p:button>
+					<p:commandButton
+						action="#{empresaManagedBean.removerEmpresa(empresa.id)}"
+						value="Excluir" styleClass="rounded-button ui-button-danger" />
 				</p:column>
 
 			</p:dataTable>

@@ -1,39 +1,49 @@
 <?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>
-	<title><ui:insert name="titulo">Estaggio</ui:insert></title>
-	<h:outputStylesheet library="arquivos" name="styles.css" />
-</h:head>
-<h:body>
-	<header> <h1>Estaggio</h1> </header>
-	<h:form>
-		<p:menubar style="margin-top: -20px; margin-bottom: 20px">
-			<p:submenu label="Cadastrar-se">
-				<p:menuitem value="Sou aluno"
-					action="/cadastro-aluno?faces-redirect=true" />
-				<p:menuitem value="Sou professor"
-					action="/cadastro-professor?faces-redirect=true" />
-				<p:menuitem value="Sou uma empresa"
-					action="/cadastro-empresa?faces-redirect=true" />
-			</p:submenu>
-			<p:submenu label="Visualizar">
-				<p:menuitem value="Alunos"
-					action="/alunos?faces-redirect=true" />
-				<p:menuitem value="Professores"
-					action="/orientadores?faces-redirect=true" />
-				<p:menuitem value="Empresas"
-					action="/empresas?faces-redirect=true" />
-			</p:submenu>
-		</p:menubar>
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
 
-	</h:form>
-	<div id="conteudo">
-		<ui:insert name="corpo" />
-	</div>
-	<footer> Estaggio </footer>
+<h:head>
+    <title><ui:insert name="titulo">Estaggio</ui:insert></title>
+    <h:outputStylesheet library="arquivos" name="styles.css" />
+</h:head>
+
+<h:body>
+    <header>
+        <p:commandLink action="/index?faces-redirect=true">
+            <h1>Estaggio</h1>
+        </p:commandLink>
+    </header>
+
+    <h:form>
+        <p:menubar style="margin-top: -20px; margin-bottom: 20px">
+            <p:submenu label="Cadastrar-se">
+                <p:menuitem value="Sou aluno" outcome="/cadastro-aluno?faces-redirect=true" />
+                <p:menuitem value="Sou professor" outcome="/cadastro-orientador?faces-redirect=true" />
+                <p:menuitem value="Sou uma empresa" outcome="/cadastro-empresa?faces-redirect=true" />
+            </p:submenu>
+            <p:submenu label="Visualizar">
+                <p:menuitem value="Alunos" outcome="/alunos?faces-redirect=true" />
+                <p:menuitem value="Professores" outcome="/orientadores?faces-redirect=true" />
+                <p:menuitem value="Empresas" outcome="/empresas?faces-redirect=true" />
+            </p:submenu>
+            <p:submenu label="Área do estágio">
+                <p:menuitem value="Cadastrar estágio" outcome="/cadastro-estagio?faces-redirect=true" />
+                <p:menuitem value="Lista de estágios" outcome="/estagios?faces-redirect=true" />
+                <p:menuitem value="Avaliações dos professores" outcome="/avaliacoes-professor?faces-redirect=true" />
+                <p:menuitem value="Avaliações das empresas" outcome="/avaliacoes-empresa?faces-redirect=true" />
+            </p:submenu>
+        </p:menubar>
+    </h:form>
+
+    <div id="conteudo">
+        <ui:insert name="corpo" />
+    </div>
+
+    <footer> Estaggio </footer>
 </h:body>
+
 </html>

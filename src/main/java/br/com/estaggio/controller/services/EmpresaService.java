@@ -24,4 +24,19 @@ public class EmpresaService implements Serializable {
 		return this.empresaDAO.todasEmpresas();
 	}
 	
+	@Transactional
+	public void removerEmpresa(EmpresaEntity empresa) {
+		this.empresaDAO.removerEmpresa(empresa);
+	}
+	
+	@Transactional
+	public EmpresaEntity buscarPorId(Long id) {
+		return this.empresaDAO.buscarPorId(id);
+	}
+	
+	@Transactional
+	public void atualizarEmpresa(EmpresaEntity empresa) {
+		this.empresaDAO.atualizarEmpresa(empresa);
+	}
+	
 }

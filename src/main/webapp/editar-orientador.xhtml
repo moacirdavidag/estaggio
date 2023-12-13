@@ -7,28 +7,32 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 	<h:head>
-		<title>Cadastro de orientador</title>
+		<title>Editar orientador</title>
 	</h:head>
-	<ui:define name="titulo">Cadastro de orientador</ui:define>
+	<f:metadata>
+		<f:viewParam name="idOrientador" value="#{orientadorManagedBean.id}" />
+		<f:event type="preRenderView" listener="#{orientadorManagedBean.carregarOrientadorAtualizacao}" />
+	</f:metadata>
+	<ui:define name="titulo">Editar orientador</ui:define>
 	<ui:define name="corpo">
 		<h2>Cadastro de orientador</h2>
 		<h:form id="frm">
 			<h:messages showDetail="false" showSummary="true" />
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome completo" />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.nome}"
+				<h:inputText size="60" value="#{orientadorManagedBean.orientadorSelecionado.nome}"
 					label="Nome completo" />
 				<h:outputLabel value="CPF: " />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.cpf}"
+				<h:inputText size="60" value="#{orientadorManagedBean.orientadorSelecionado.cpf}"
 					label="CPF " />
 				<h:outputLabel value="Matrícula: " />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.matricula}"
+				<h:inputText size="60" value="#{orientadorManagedBean.orientadorSelecionado.matricula}"
 					label="Matricula " />
 				<h:outputLabel value="Email: " />
-				<h:inputText size="60" value="#{orientadorManagedBean.orientador.email}"
+				<h:inputText size="60" value="#{orientadorManagedBean.orientadorSelecionado.email}"
 					label="Email " />
 				<h:outputLabel />
-				<h:commandButton value="Salvar" action="#{orientadorManagedBean.salvar}" />
+				<h:commandButton value="Salvar" action="#{orientadorManagedBean.salvarAtualizacao}" />
 			</h:panelGrid>
 		</h:form>
 	</ui:define>
